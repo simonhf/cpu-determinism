@@ -1,0 +1,23 @@
+Dump of assembler code for function burn_cpu:
+   0x00000000000020b0 <+0>:	endbr64 
+   0x00000000000020b4 <+4>:	movq   $0x0,-0x8(%rsp)
+   0x00000000000020bd <+13>:	rdtsc  
+   0x00000000000020bf <+15>:	mov    %rax,%rcx
+   0x00000000000020c2 <+18>:	shl    $0x20,%rdx
+   0x00000000000020c6 <+22>:	or     %rdx,%rcx
+   0x00000000000020c9 <+25>:	nopl   0x0(%rax)
+   0x00000000000020d0 <+32>:	mov    -0x8(%rsp),%rax
+   0x00000000000020d5 <+37>:	sub    $0x1,%edi
+   0x00000000000020d8 <+40>:	add    $0x1,%rax
+   0x00000000000020dc <+44>:	mov    %rax,-0x8(%rsp)
+   0x00000000000020e1 <+49>:	test   %edi,%edi
+   0x00000000000020e3 <+51>:	jg     0x20d0 <burn_cpu+32>
+   0x00000000000020e5 <+53>:	rdtsc  
+   0x00000000000020e7 <+55>:	shl    $0x20,%rdx
+   0x00000000000020eb <+59>:	or     %rdx,%rax
+   0x00000000000020ee <+62>:	xor    %edx,%edx
+   0x00000000000020f0 <+64>:	sub    %rcx,%rax
+   0x00000000000020f3 <+67>:	imul   $0x3b9aca00,%rax,%rax
+   0x00000000000020fa <+74>:	divq   0x3c5f(%rip)        # 0x5d60 <tsc_per_second>
+   0x0000000000002101 <+81>:	ret    
+End of assembler dump.

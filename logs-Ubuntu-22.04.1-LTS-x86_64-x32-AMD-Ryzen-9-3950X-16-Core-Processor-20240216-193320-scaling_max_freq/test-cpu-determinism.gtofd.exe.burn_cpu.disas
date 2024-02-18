@@ -1,0 +1,56 @@
+Dump of assembler code for function burn_cpu:
+   0x0000000000001f70 <+0>:	endbr64 
+   0x0000000000001f74 <+4>:	push   %r12
+   0x0000000000001f76 <+6>:	xor    %esi,%esi
+   0x0000000000001f78 <+8>:	push   %rbp
+   0x0000000000001f79 <+9>:	push   %rbx
+   0x0000000000001f7a <+10>:	mov    %edi,%ebx
+   0x0000000000001f7c <+12>:	sub    $0x30,%rsp
+   0x0000000000001f80 <+16>:	mov    %fs:0x28,%rax
+   0x0000000000001f89 <+25>:	mov    %rax,0x28(%rsp)
+   0x0000000000001f8e <+30>:	xor    %eax,%eax
+   0x0000000000001f90 <+32>:	lea    0x10(%rsp),%r12
+   0x0000000000001f95 <+37>:	movq   $0x0,0x8(%rsp)
+   0x0000000000001f9e <+46>:	mov    %r12,%rdi
+   0x0000000000001fa1 <+49>:	call   0x1160 <gettimeofday@plt>
+   0x0000000000001fa6 <+54>:	mov    0x10(%rsp),%rbp
+   0x0000000000001fab <+59>:	mov    0x18(%rsp),%rax
+   0x0000000000001fb0 <+64>:	sub    0x3da9(%rip),%rbp        # 0x5d60 <tv_start>
+   0x0000000000001fb7 <+71>:	sub    0x3daa(%rip),%rax        # 0x5d68 <tv_start+8>
+   0x0000000000001fbe <+78>:	jns    0x1fca <burn_cpu+90>
+   0x0000000000001fc0 <+80>:	sub    $0x1,%rbp
+   0x0000000000001fc4 <+84>:	add    $0xf4240,%rax
+   0x0000000000001fca <+90>:	imul   $0x3b9aca00,%rbp,%rbp
+   0x0000000000001fd1 <+97>:	imul   $0x3e8,%rax,%rax
+   0x0000000000001fd8 <+104>:	add    %rax,%rbp
+   0x0000000000001fdb <+107>:	nopl   0x0(%rax,%rax,1)
+   0x0000000000001fe0 <+112>:	mov    0x8(%rsp),%rax
+   0x0000000000001fe5 <+117>:	sub    $0x1,%ebx
+   0x0000000000001fe8 <+120>:	add    $0x1,%rax
+   0x0000000000001fec <+124>:	mov    %rax,0x8(%rsp)
+   0x0000000000001ff1 <+129>:	test   %ebx,%ebx
+   0x0000000000001ff3 <+131>:	jg     0x1fe0 <burn_cpu+112>
+   0x0000000000001ff5 <+133>:	xor    %esi,%esi
+   0x0000000000001ff7 <+135>:	mov    %r12,%rdi
+   0x0000000000001ffa <+138>:	call   0x1160 <gettimeofday@plt>
+   0x0000000000001fff <+143>:	mov    0x10(%rsp),%rax
+   0x0000000000002004 <+148>:	mov    0x18(%rsp),%rdx
+   0x0000000000002009 <+153>:	sub    0x3d50(%rip),%rax        # 0x5d60 <tv_start>
+   0x0000000000002010 <+160>:	sub    0x3d51(%rip),%rdx        # 0x5d68 <tv_start+8>
+   0x0000000000002017 <+167>:	jns    0x2024 <burn_cpu+180>
+   0x0000000000002019 <+169>:	sub    $0x1,%rax
+   0x000000000000201d <+173>:	add    $0xf4240,%rdx
+   0x0000000000002024 <+180>:	imul   $0x3b9aca00,%rax,%rax
+   0x000000000000202b <+187>:	imul   $0x3e8,%rdx,%rdx
+   0x0000000000002032 <+194>:	add    %rdx,%rax
+   0x0000000000002035 <+197>:	sub    %rbp,%rax
+   0x0000000000002038 <+200>:	mov    0x28(%rsp),%rdx
+   0x000000000000203d <+205>:	sub    %fs:0x28,%rdx
+   0x0000000000002046 <+214>:	jne    0x2051 <burn_cpu+225>
+   0x0000000000002048 <+216>:	add    $0x30,%rsp
+   0x000000000000204c <+220>:	pop    %rbx
+   0x000000000000204d <+221>:	pop    %rbp
+   0x000000000000204e <+222>:	pop    %r12
+   0x0000000000002050 <+224>:	ret    
+   0x0000000000002051 <+225>:	call   0x1150 <__stack_chk_fail@plt>
+End of assembler dump.

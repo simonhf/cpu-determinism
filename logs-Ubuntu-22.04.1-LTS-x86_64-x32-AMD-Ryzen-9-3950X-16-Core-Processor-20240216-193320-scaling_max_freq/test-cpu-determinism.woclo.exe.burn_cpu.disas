@@ -1,0 +1,13 @@
+Dump of assembler code for function burn_cpu:
+   0x0000000000001e40 <+0>:	endbr64 
+   0x0000000000001e44 <+4>:	movq   $0x0,-0x8(%rsp)
+   0x0000000000001e4d <+13>:	nopl   (%rax)
+   0x0000000000001e50 <+16>:	mov    -0x8(%rsp),%rax
+   0x0000000000001e55 <+21>:	sub    $0x1,%edi
+   0x0000000000001e58 <+24>:	add    $0x1,%rax
+   0x0000000000001e5c <+28>:	mov    %rax,-0x8(%rsp)
+   0x0000000000001e61 <+33>:	test   %edi,%edi
+   0x0000000000001e63 <+35>:	jg     0x1e50 <burn_cpu+16>
+   0x0000000000001e65 <+37>:	xor    %eax,%eax
+   0x0000000000001e67 <+39>:	ret    
+End of assembler dump.
