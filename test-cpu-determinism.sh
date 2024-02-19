@@ -192,10 +192,10 @@ echo "# pstree -A -p $$ # sub processes from this bash script AFTER killing"
 pstree -A -p $$
 
 echo "# show burn_cpu() functions; clogt, gtofd, rdtsc, & woclo"
-perl -e '$lines = `cat \$USE_DIR/test-cpu-determinism.clogt.s`; ($burn) = $lines =~ m~(burn_cpu:.*?\.cfi_endproc)~s; printf qq[%s\n], $burn;' | egrep -v "(.cfi_|endbr64|.p2align|.loc|.L[BFV])" > $USE_DIR/test-cpu-determinism.clogt.burn.s
-perl -e '$lines = `cat \$USE_DIR/test-cpu-determinism.gtofd.s`; ($burn) = $lines =~ m~(burn_cpu:.*?\.cfi_endproc)~s; printf qq[%s\n], $burn;' | egrep -v "(.cfi_|endbr64|.p2align|.loc|.L[BFV])" > $USE_DIR/test-cpu-determinism.gtofd.burn.s
-perl -e '$lines = `cat \$USE_DIR/test-cpu-determinism.rdtsc.s`; ($burn) = $lines =~ m~(burn_cpu:.*?\.cfi_endproc)~s; printf qq[%s\n], $burn;' | egrep -v "(.cfi_|endbr64|.p2align|.loc|.L[BFV])" > $USE_DIR/test-cpu-determinism.rdtsc.burn.s
-perl -e '$lines = `cat \$USE_DIR/test-cpu-determinism.woclo.s`; ($burn) = $lines =~ m~(burn_cpu:.*?\.cfi_endproc)~s; printf qq[%s\n], $burn;' | egrep -v "(.cfi_|endbr64|.p2align|.loc|.L[BFV])" > $USE_DIR/test-cpu-determinism.woclo.burn.s
+perl -e '$lines = `cat \$USE_DIR/test-cpu-determinism.clogt.s`; ($burn) = $lines =~ m~(burn_cpu:.*?\.cfi_endproc)~s; printf qq[%s\n], $burn;' | egrep -v "(\.cfi_|endbr64|\.p2align|\.loc|\.L[BFV])" > $USE_DIR/test-cpu-determinism.clogt.burn.s
+perl -e '$lines = `cat \$USE_DIR/test-cpu-determinism.gtofd.s`; ($burn) = $lines =~ m~(burn_cpu:.*?\.cfi_endproc)~s; printf qq[%s\n], $burn;' | egrep -v "(\.cfi_|endbr64|\.p2align|\.loc|\.L[BFV])" > $USE_DIR/test-cpu-determinism.gtofd.burn.s
+perl -e '$lines = `cat \$USE_DIR/test-cpu-determinism.rdtsc.s`; ($burn) = $lines =~ m~(burn_cpu:.*?\.cfi_endproc)~s; printf qq[%s\n], $burn;' | egrep -v "(\.cfi_|endbr64|\.p2align|\.loc|\.L[BFV])" > $USE_DIR/test-cpu-determinism.rdtsc.burn.s
+perl -e '$lines = `cat \$USE_DIR/test-cpu-determinism.woclo.s`; ($burn) = $lines =~ m~(burn_cpu:.*?\.cfi_endproc)~s; printf qq[%s\n], $burn;' | egrep -v "(\.cfi_|endbr64|\.p2align|\.loc|\.L[BFV])" > $USE_DIR/test-cpu-determinism.woclo.burn.s
 pr --width 192 --omit-pagination --merge --expand-tabs $USE_DIR/test-cpu-determinism.clogt.burn.s $USE_DIR/test-cpu-determinism.gtofd.burn.s $USE_DIR/test-cpu-determinism.rdtsc.burn.s $USE_DIR/test-cpu-determinism.woclo.burn.s
 
 echo "# echo todo: try on intel"
