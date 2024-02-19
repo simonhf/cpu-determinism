@@ -11,6 +11,7 @@ burn_cpu:
 	leaq	16(%rsp), %r12
 	movq	$0, 8(%rsp)
 	movq	%r12, %rsi
+	call	clock_gettime@PLT
 	movq	16(%rsp), %rbp
 	movq	24(%rsp), %rax
 	subq	ts_start(%rip), %rbp
@@ -30,6 +31,7 @@ burn_cpu:
 	jg	.L22
 	movq	%r12, %rsi
 	movl	$1, %edi
+	call	clock_gettime@PLT
 	movq	24(%rsp), %rax
 	subq	8+ts_start(%rip), %rax
 	movq	%rax, %rdx

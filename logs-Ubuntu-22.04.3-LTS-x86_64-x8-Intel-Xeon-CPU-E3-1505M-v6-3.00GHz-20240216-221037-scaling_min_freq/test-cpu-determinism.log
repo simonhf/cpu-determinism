@@ -21737,49 +21737,51 @@ burn_cpu:					burn_cpu:					burn_cpu:					burn_cpu:
 	leaq	16(%rsp), %r12				leaq	16(%rsp), %r12				movq	%rax, -8(%rsp)				ret
 	movq	$0, 8(%rsp)				movq	$0, 8(%rsp)				testl	%edi, %edi			
 	movq	%r12, %rsi				movq	%r12, %rdi				jg	.L21				
-	movq	16(%rsp), %rbp				call	gettimeofday@PLT			rdtsc					
-	movq	24(%rsp), %rax				movq	16(%rsp), %rbp				salq	$32, %rdx			
-	subq	ts_start(%rip), %rbp			movq	24(%rsp), %rax				orq	%rdx, %rax			
-	subq	8+ts_start(%rip), %rax			subq	tv_start(%rip), %rbp			xorl	%edx, %edx			
-	jns	.L21					subq	8+tv_start(%rip), %rax			subq	%rcx, %rax			
-	subq	$1, %rbp				jns	.L18					imulq	$1000000000, %rax, %rax		
-	addq	$1000000000, %rax			subq	$1, %rbp				divq	tsc_per_second(%rip)		
-.L21:							addq	$1000000, %rax				ret					
-	imulq	$1000000000, %rbp, %rbp		.L18:												
-	addq	%rax, %rbp				imulq	$1000000000, %rbp, %rbp								
-.L22:							imulq	$1000, %rax, %rax								
-	movq	8(%rsp), %rax				addq	%rax, %rbp									
-	subl	$1, %ebx			.L19:												
-	addq	$1, %rax				movq	8(%rsp), %rax									
-	movq	%rax, 8(%rsp)				subl	$1, %ebx									
-	testl	%ebx, %ebx				addq	$1, %rax									
-	jg	.L22					movq	%rax, 8(%rsp)									
-	movq	%r12, %rsi				testl	%ebx, %ebx									
-	movl	$1, %edi				jg	.L19										
-	movq	24(%rsp), %rax				xorl	%esi, %esi									
-	subq	8+ts_start(%rip), %rax			movq	%r12, %rdi									
-	movq	%rax, %rdx				call	gettimeofday@PLT								
-	movq	16(%rsp), %rax				movq	16(%rsp), %rax									
-	js	.L28					movq	24(%rsp), %rdx									
-	subq	ts_start(%rip), %rax			subq	tv_start(%rip), %rax								
-.L24:							subq	8+tv_start(%rip), %rdx								
-	imulq	$1000000000, %rax, %rax			jns	.L20										
-	addq	%rdx, %rax				subq	$1, %rax									
-	subq	%rbp, %rax				addq	$1000000, %rdx									
-	movq	40(%rsp), %rdx			.L20:												
-	subq	%fs:40, %rdx				imulq	$1000000000, %rax, %rax								
-	jne	.L29					imulq	$1000, %rdx, %rdx								
-	addq	$48, %rsp				addq	%rdx, %rax									
-	popq	%rbx					subq	%rbp, %rax									
-	popq	%rbp					movq	40(%rsp), %rdx									
-	popq	%r12					subq	%fs:40, %rdx									
-	ret						jne	.L24										
-.L28:							addq	$48, %rsp									
-	subq	ts_start(%rip), %rax			popq	%rbx										
-	addq	$1000000000, %rdx			popq	%rbp										
-	subq	$1, %rax				popq	%r12										
-	jmp	.L24					ret											
-.L29:						.L24:												
-	call	__stack_chk_fail@PLT			call	__stack_chk_fail@PLT								
+	call	clock_gettime@PLT			call	gettimeofday@PLT			rdtsc					
+	movq	16(%rsp), %rbp				movq	16(%rsp), %rbp				salq	$32, %rdx			
+	movq	24(%rsp), %rax				movq	24(%rsp), %rax				orq	%rdx, %rax			
+	subq	ts_start(%rip), %rbp			subq	tv_start(%rip), %rbp			xorl	%edx, %edx			
+	subq	8+ts_start(%rip), %rax			subq	8+tv_start(%rip), %rax			subq	%rcx, %rax			
+	jns	.L21					jns	.L18					imulq	$1000000000, %rax, %rax		
+	subq	$1, %rbp				subq	$1, %rbp				divq	tsc_per_second(%rip)		
+	addq	$1000000000, %rax			addq	$1000000, %rax				ret					
+.L21:						.L18:												
+	imulq	$1000000000, %rbp, %rbp			imulq	$1000000000, %rbp, %rbp								
+	addq	%rax, %rbp				imulq	$1000, %rax, %rax								
+.L22:							addq	%rax, %rbp									
+	movq	8(%rsp), %rax			.L19:												
+	subl	$1, %ebx				movq	8(%rsp), %rax									
+	addq	$1, %rax				subl	$1, %ebx									
+	movq	%rax, 8(%rsp)				addq	$1, %rax									
+	testl	%ebx, %ebx				movq	%rax, 8(%rsp)									
+	jg	.L22					testl	%ebx, %ebx									
+	movq	%r12, %rsi				jg	.L19										
+	movl	$1, %edi				xorl	%esi, %esi									
+	call	clock_gettime@PLT			movq	%r12, %rdi									
+	movq	24(%rsp), %rax				call	gettimeofday@PLT								
+	subq	8+ts_start(%rip), %rax			movq	16(%rsp), %rax									
+	movq	%rax, %rdx				movq	24(%rsp), %rdx									
+	movq	16(%rsp), %rax				subq	tv_start(%rip), %rax								
+	js	.L28					subq	8+tv_start(%rip), %rdx								
+	subq	ts_start(%rip), %rax			jns	.L20										
+.L24:							subq	$1, %rax									
+	imulq	$1000000000, %rax, %rax			addq	$1000000, %rdx									
+	addq	%rdx, %rax			.L20:												
+	subq	%rbp, %rax				imulq	$1000000000, %rax, %rax								
+	movq	40(%rsp), %rdx				imulq	$1000, %rdx, %rdx								
+	subq	%fs:40, %rdx				addq	%rdx, %rax									
+	jne	.L29					subq	%rbp, %rax									
+	addq	$48, %rsp				movq	40(%rsp), %rdx									
+	popq	%rbx					subq	%fs:40, %rdx									
+	popq	%rbp					jne	.L24										
+	popq	%r12					addq	$48, %rsp									
+	ret						popq	%rbx										
+.L28:							popq	%rbp										
+	subq	ts_start(%rip), %rax			popq	%r12										
+	addq	$1000000000, %rdx			ret											
+	subq	$1, %rax			.L24:												
+	jmp	.L24					call	__stack_chk_fail@PLT								
+.L29:																		
+	call	__stack_chk_fail@PLT														
 # echo todo: try on intel
 # find logs in directory: logs-Ubuntu-22.04.3-LTS-x86_64-x8-Intel-Xeon-CPU-E3-1505M-v6-3.00GHz-20240216-221037-scaling_min_freq/
